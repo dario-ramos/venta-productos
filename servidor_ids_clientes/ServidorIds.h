@@ -12,13 +12,13 @@ public:
 	~ServidorIds();
 	int pedirId();
 	bool devolverId(int id);
-	char * error_msg(){return error;}
-	operator bool()const {return !error_;}
+	char * error_msg(){return error_msg_;}
+	operator bool() const {return error_;}
 private:
 	fstream file;
 	bool generar_archivo();
 	bool error_;
-	char error[200];
+	char error_msg_[200];
 };
 
 #endif

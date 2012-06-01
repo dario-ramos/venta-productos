@@ -5,7 +5,7 @@ ServidorIds::ServidorIds() : file(ARCHIVO , fstream::in | fstream::out | fstream
 		if(!generar_archivo()){
 			perror("servidor_ids: error al generar el archivo de ids. ");
 			file.close();
-			sprintf(error, "No hay mas ids libres.\n");
+			sprintf(error_msg_, "No hay mas ids libres.\n");
 		}
 		file.open(ARCHIVO, fstream::in | fstream::out | fstream::binary);
 	}
@@ -31,8 +31,8 @@ int ServidorIds::pedirId(){
 		file.seekg (0, ios::beg);
 		file.write((char *)&pos, sizeof(int));
 	}else{
-		perror("servidor_ids: no hay mas ids libres");
-		sprintf(error, "No hay mas ids libres.\n");
+		error_ = true;
+		sprintf(error_msg_, "No hay mas ids libres.\n");
 	}
 	return id;
 }
@@ -49,8 +49,7 @@ bool ServidorIds::devolverId(int id){
 		file.seekg (0, ios::beg);
 		file.write((char *)&pos, sizeof(int));
 	}else{
-		perror("servidor_ids: se intento devolver id existente");
-		sprintf(error, "Se intento devolver id existente.\n");
+		sprintf(error_msg_, "Se intento devolver id existente.\n");
 		error_ = true;
 		return false;
 	}
@@ -66,5 +65,9 @@ bool ServidorIds::generar_archivo(){
 		file.write((char *)&i, sizeof(int));
 	}
 	file.close();
+	if(file.bad()){
+		error_ = true;
+		sprintf(error_msg_, "Error al generar el archivo de ids");
+	}
 	return !file.bad();
 }
