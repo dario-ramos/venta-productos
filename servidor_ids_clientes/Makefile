@@ -9,12 +9,12 @@ SERVER = servidor_ids_clientes_server
 SOURCES_CLNT.c = 
 SOURCES_CLNT.h = 
 SOURCES_SVC.c = 
-SOURCES_SVC.h = 
+SOURCES_SVC.h = ServidorIds.h
 SOURCES.x = servidor_ids_clientes.x
 
-TARGETS_SVC.c = servidor_ids_clientes_svc.c servidor_ids_clientes_server.c servidor_ids_clientes_xdr.c 
+TARGETS_SVC.c =  ServidorIds.cpp servidor_ids_clientes_svc.c servidor_ids_clientes_server.c servidor_ids_clientes_xdr.c
 TARGETS_CLNT.c = servidor_ids_clientes_clnt.c servidor_ids_clientes_client.c servidor_ids_clientes_xdr.c 
-TARGETS = servidor_ids_clientes.h servidor_ids_clientes_xdr.c servidor_ids_clientes_clnt.c servidor_ids_clientes_svc.c servidor_ids_clientes_client.c servidor_ids_clientes_server.c
+TARGETS = servidor_ids_clientes.h servidor_ids_clientes_xdr.c servidor_ids_clientes_clnt.c servidor_ids_clientes_svc.c servidor_ids_clientes_client.c servidor_ids_clientes_server.c 
 
 OBJECTS_CLNT = $(SOURCES_CLNT.c:%.c=%.o) $(TARGETS_CLNT.c:%.c=%.o)
 OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o)
