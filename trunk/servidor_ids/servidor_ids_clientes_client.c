@@ -28,14 +28,21 @@ servidor_ids_prog_1(char *host)
 	if (result_1 == (retorno *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
-	printf( "Se pide el Id. cod_ret: %d, id_cliente: %i\n", result_1->cod_ret, result_1->retorno_u.id_cliente );
+	if(result_1->cod_ret == 1)
+		printf( "Se pide el Id. cod_ret: %d, id_cliente: %i\n", result_1->cod_ret, result_1->retorno_u.id_cliente );
+	else
+		printf( "Se pide el Id. cod_ret: %d, error: %s\n", result_1->cod_ret, result_1->retorno_u.msj_error );
 	devolver_id_cliente_1_arg = result_1->retorno_u.id_cliente;
 	result_2 = devolver_id_cliente_1(&devolver_id_cliente_1_arg, clnt);
 	if (result_2 == (retorno *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
+	if(result_2->cod_ret == 1)
+		printf( "Se devuelve el Id. cod_ret: %d, id_cliente: %i\n", result_2->cod_ret, result_2->retorno_u.id_cliente );
+	else
+		printf( "Se pide el Id. cod_ret: %d, error: %s\n", result_2->cod_ret, result_2->retorno_u.msj_error );
 
-	printf( "Se devuelve el Id. cod_ret: %d, id_cliente: %i\n", result_1->cod_ret, result_1->retorno_u.id_cliente );
+
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
