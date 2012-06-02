@@ -20,7 +20,7 @@ static void
 servidor_ids_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
-		int fill;
+		int devolver_id_cliente_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -35,6 +35,12 @@ servidor_ids_prog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		_xdr_argument = (xdrproc_t) xdr_void;
 		_xdr_result = (xdrproc_t) xdr_retorno;
 		local = (char *(*)(char *, struct svc_req *)) obtener_nuevo_id_cliente_1_svc;
+		break;
+
+	case DEVOLVER_ID_CLIENTE:
+		_xdr_argument = (xdrproc_t) xdr_int;
+		_xdr_result = (xdrproc_t) xdr_retorno;
+		local = (char *(*)(char *, struct svc_req *)) devolver_id_cliente_1_svc;
 		break;
 
 	default:

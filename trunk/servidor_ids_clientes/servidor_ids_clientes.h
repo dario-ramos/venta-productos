@@ -17,7 +17,7 @@ extern "C" {
 struct retorno {
 	int cod_ret;
 	union {
-		char id_cliente[800];
+		int id_cliente;
 		char msj_error[800];
 	} retorno_u;
 };
@@ -30,12 +30,18 @@ typedef struct retorno retorno;
 #define OBTENER_NUEVO_ID_CLIENTE 1
 extern  retorno * obtener_nuevo_id_cliente_1(void *, CLIENT *);
 extern  retorno * obtener_nuevo_id_cliente_1_svc(void *, struct svc_req *);
+#define DEVOLVER_ID_CLIENTE 2
+extern  retorno * devolver_id_cliente_1(int *, CLIENT *);
+extern  retorno * devolver_id_cliente_1_svc(int *, struct svc_req *);
 extern int servidor_ids_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define OBTENER_NUEVO_ID_CLIENTE 1
 extern  retorno * obtener_nuevo_id_cliente_1();
 extern  retorno * obtener_nuevo_id_cliente_1_svc();
+#define DEVOLVER_ID_CLIENTE 2
+extern  retorno * devolver_id_cliente_1();
+extern  retorno * devolver_id_cliente_1_svc();
 extern int servidor_ids_prog_1_freeresult ();
 #endif /* K&R C */
 
