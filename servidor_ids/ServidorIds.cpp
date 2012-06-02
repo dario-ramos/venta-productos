@@ -1,11 +1,12 @@
 #include "ServidorIds.h"
 
-ServidorIds::ServidorIds() : file(ARCHIVO , fstream::in | fstream::out | fstream::binary){
+ServidorIds::ServidorIds() : file(ARCHIVO , fstream::in | fstream::out | fstream::binary), error_(false){
 	if(!file.is_open()){
 		if(!generar_archivo()){
 			perror("servidor_ids: error al generar el archivo de ids. ");
 			file.close();
-			sprintf(error_msg_, "No hay mas ids libres.\n");
+			sprintf(error_msg_, "No se pudo generar el archivo de ids.\n");
+			printf("No hay mas ids libres.\n");
 		}
 		file.open(ARCHIVO, fstream::in | fstream::out | fstream::binary);
 	}

@@ -9,15 +9,19 @@
 
 retorno * obtener_nuevo_id_cliente_1_svc(void *argp, struct svc_req *rqstp){
 	static retorno result;
+	result.cod_ret = 1;
+	result.retorno_u.id_cliente = 0;
 	ServidorIds servidorIds;
 	int idCliente = servidorIds.pedirId();
 	printf("Se quiere entregar el id %i\n", idCliente);
 	if(servidorIds){
 		result.cod_ret = 1;
 		result.retorno_u.id_cliente = idCliente;
+		printf("Todod joya %i\n", idCliente);
 	}else{
 		result.cod_ret = 2;
 		strcpy(result.retorno_u.msj_error, servidorIds.error_msg());
+		printf("Errorrr %s\n", servidorIds.error_msg());
 	}
 	return &result;
 }

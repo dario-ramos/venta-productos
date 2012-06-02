@@ -13,7 +13,7 @@ public:
 	int pedirId();
 	bool devolverId(int id);
 	char * error_msg(){return error_msg_;}
-	operator bool() const {return error_;}
+	operator bool() const {return !error_;}
 private:
 	fstream file;
 	bool generar_archivo();
