@@ -14,8 +14,7 @@ xdr_retorno (XDR *xdrs, retorno *objp)
 		 return FALSE;
 	switch (objp->cod_ret) {
 	case 1:
-		 if (!xdr_vector (xdrs, (char *)objp->retorno_u.id_cliente, 800,
-			sizeof (char), (xdrproc_t) xdr_char))
+		 if (!xdr_int (xdrs, &objp->retorno_u.id_cliente))
 			 return FALSE;
 		break;
 	case 2:

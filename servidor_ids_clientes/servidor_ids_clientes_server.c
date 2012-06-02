@@ -11,7 +11,24 @@ retorno * obtener_nuevo_id_cliente_1_svc(void *argp, struct svc_req *rqstp){
 	static retorno result;
 	ServidorIds servidorIds;
 	int idCliente = servidorIds.pedirId();
+	printf("Se quiere entregar el id %i\n", idCliente);
+	if(servidorIds){
+		result.cod_ret = 1;
+		result.retorno_u.id_cliente = idCliente;
+	}else{
+		result.cod_ret = 2;
+		strcpy(result.retorno_u.msj_error, servidorIds.error_msg());
+	}
+	return &result;
+}
+
+retorno * devolver_id_cliente_1_svc(int *id, struct svc_req *rqstp){
+	static retorno result;
+
+	printf("Se quiere devolver el id %i\n", *id);
+	ServidorIds servidorIds;
+	int idCliente = servidorIds.pedirId();
 	result.cod_ret = 1;
-	sprintf( result.retorno_u.id_cliente, "%d", idCliente );
+	result.retorno_u.id_cliente = idCliente;
 	return &result;
 }

@@ -6,12 +6,15 @@
 
 #include "servidor_ids_clientes.h"
 
+
 void
 servidor_ids_prog_1(char *host)
 {
 	CLIENT *clnt;
 	retorno  *result_1;
 	char *obtener_nuevo_id_cliente_1_arg;
+	retorno  *result_2;
+	int  devolver_id_cliente_1_arg;
 
 #ifndef	DEBUG
 	clnt = clnt_create (host, SERVIDOR_IDS_PROG, SERVIDOR_IDS_VERS, "udp");
@@ -25,7 +28,14 @@ servidor_ids_prog_1(char *host)
 	if (result_1 == (retorno *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
-	printf( "Llamada remota terminada. cod_ret: %d, id_cliente: %s", result_1->cod_ret, result_1->retorno_u.id_cliente );
+	printf( "Se pide el Id. cod_ret: %d, id_cliente: %i\n", result_1->cod_ret, result_1->retorno_u.id_cliente );
+	devolver_id_cliente_1_arg = result_1->retorno_u.id_cliente;
+	result_2 = devolver_id_cliente_1(&devolver_id_cliente_1_arg, clnt);
+	if (result_2 == (retorno *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+
+	printf( "Se devuelve el Id. cod_ret: %d, id_cliente: %i\n", result_1->cod_ret, result_1->retorno_u.id_cliente );
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
