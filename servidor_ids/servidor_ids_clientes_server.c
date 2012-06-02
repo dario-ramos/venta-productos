@@ -27,8 +27,13 @@ retorno * devolver_id_cliente_1_svc(int *id, struct svc_req *rqstp){
 
 	printf("Se quiere devolver el id %i\n", *id);
 	ServidorIds servidorIds;
-	int idCliente = servidorIds.pedirId();
-	result.cod_ret = 1;
-	result.retorno_u.id_cliente = idCliente;
+	servidorIds.devolverId(*id);
+	if(servidorIds){
+		result.cod_ret = 1;
+		result.retorno_u.id_cliente = *id;
+	}else{	
+		result.cod_ret = 2;
+		strcpy(result.retorno_u.msj_error, servidorIds.error_msg());
+	}
 	return &result;
 }
