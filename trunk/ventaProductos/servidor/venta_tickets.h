@@ -1,5 +1,5 @@
 #pragma once
-#define DIRECTORIO "/Users/Tomas/Documents/distribuidos1/ventaProductos"
+#define DIRECTORIO "/root/Desktop/trunk/ventaProductos"
 #define TICKETS 50
 #define VENDEDORES 4
 #define CLIENTES 3
