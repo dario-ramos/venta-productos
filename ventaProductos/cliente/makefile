@@ -2,15 +2,15 @@
 
 MYLIB= enviar.o recibir.o tcpopact.o
 LIBS	=
-CFLAGS	= -O -g -D_SLAX_
+CFLAGS	= -O -g -D_SLAX_ -I/root/Desktop/trunk/servidor_ids_clientes
 
 # Internet stream version (TCP protocol).
 #
 
 all:	 cliente puerto_entrada puerto_salida
 
-cliente: cliente.cpp venta_tickets.h Cliente.h Comunicacion.h Comunicacion.cpp mensajes.h $(MYLIB)
-	c++ $(CFLAGS) -o $@ cliente.cpp Comunicacion.cpp $(MYLIB)
+cliente: cliente.cpp venta_tickets.h Cliente.h Comunicacion.h Comunicacion.cpp mensajes.h servidor_ids_clientes_clnt.c servidor_ids_clientes_xdr.c $(MYLIB)
+	c++ $(CFLAGS) -o $@ cliente.cpp Comunicacion.cpp servidor_ids_clientes_clnt.c servidor_ids_clientes_xdr.c $(MYLIB)
 
 puerto_entrada: puerto_entrada.cpp  $(MYLIB)
 	c++ $(CFLAGS) -o $@ puerto_entrada.cpp  $(MYLIB)

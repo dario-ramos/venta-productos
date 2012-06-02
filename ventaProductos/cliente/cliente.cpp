@@ -63,6 +63,8 @@ int main(int argc, char ** argv){
 			sprintf(mostrar, "%s%i-%d: Compra exitosa, NroTicket: %i; Vuelto: %i\n", pname, numCliente, getpid(), respuesta.nro_ticket, respuesta.vuelto);
 		write(fileno(stdout), mostrar, strlen(mostrar));
 	}
+	sprintf(mostrar, "va a llamar Destructor de cliente\n");
+	write(fileno(stderr), mostrar, strlen(mostrar));
 	delete cliente;
 	return 0;	
 
