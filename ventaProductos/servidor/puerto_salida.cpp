@@ -9,13 +9,14 @@ int main(int argc, char ** argv){
 	int cola;
 	key_t clave;
 	int sfd;
+	int num_gate;
 	int bytes_enviados;
 	mensajes::MsjRespuesta despacho;
 	mensajes::DatosRespuesta datos_desp;
 
 	pname = argv[0];
 	sfd = atoi(argv[1]);
-	
+	num_gate = atoi(argv[2]);	
 	clave = ftok(DIRECTORIO, COLA_DESPACHO);
 	if((cola = msgget(clave, 0660)) == -1){
 		perror("cliente: error al crear la cola de compras");
@@ -23,7 +24,7 @@ int main(int argc, char ** argv){
 	}
 	
 	while(1){
-		if(recibir_mensaje(cola, &despacho, sizeof(despacho), sfd) == -1){
+		if(recibir_mensaje(cola, &despacho, sizeof(despacho), num_gate) == -1){
 			if(errno == EINVAL || errno == EIDRM){
 				sprintf(mostrar, "%s-%d: Termina\n", pname, getpid());
 				write(fileno(stderr), mostrar, strlen(mostrar));

@@ -35,6 +35,6 @@ tcpoppas.o: recibir.cpp inet.h
 
 
 clean:
-	rm -f *.o servidor puerto_entrada puerto_salida finalizador
+	rm -f *.o servidor puerto_entrada puerto_salida finalizador vendedor
 
 
