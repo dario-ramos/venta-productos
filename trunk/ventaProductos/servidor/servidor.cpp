@@ -14,7 +14,7 @@ int main(int argc, char ** argv){
 	int vendedores;
 	int puerto;
 	int sockfd, newsockfd;
-	static char par1[8];
+	static char par1[8], par2[8], par3[8];
 	char *pname;
 	int childpid;
 	int ret = 0;
@@ -106,8 +106,9 @@ int main(int argc, char ** argv){
 			continue;
 		}
 	}
-
+	i = 0;
 	while(continua){
+		i++;
 		clilen = sizeof(cli_addr);
 		newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
 		if (newsockfd < 0) {
@@ -116,21 +117,8 @@ int main(int argc, char ** argv){
         		ret = 1; 
 			continue;
         	}
-		//sprintf(mostrar, "%s-%d:Crea puerto_entrada con socket nro: %d \n", pname, 	getpid(), newsockfd);
-		//write(stderr->_fileno, mostrar, strlen(mostrar));
 		sprintf(par1, "%d", newsockfd);
-		if((childpid = fork()) < 0){
-			perror("servidor: error al crear puerto de entrada");
-			continua = false;
-        		ret = 1; 
-			continue;
-		}else if(childpid == 0){
-			execl("./puerto_entrada", "puerto_entrada", par1, (char *) 0);
-			perror("servidor: error al ejecutar un cliente");
-			continua = false;
-        		ret = 1;
-			continue;
-		}
+		sprintf(par2, "%d", i);
 		//sprintf(mostrar, "%s-%d:Crea puerto_salida con socket nro: %d \n", pname, 	getpid(), newsockfd);
 		//write(stderr->_fileno, mostrar, strlen(mostrar));
 		if((childpid = fork()) < 0){
@@ -139,7 +127,23 @@ int main(int argc, char ** argv){
         		ret = 1; 
 			continue;
 		}else if(childpid == 0){
-			execl("./puerto_salida", "puerto_salida", par1, (char *) 0);
+			execl("./puerto_salida", "puerto_salida", par1, par2, (char *) 0);
+			perror("servidor: error al ejecutar un cliente");
+			continua = false;
+        		ret = 1;
+			continue;
+		}
+
+		sprintf(par3, "%d", childpid);
+		//sprintf(mostrar, "%s-%d:Crea puerto_entrada con socket nro: %d \n", pname, 	getpid(), newsockfd);
+		//write(stderr->_fileno, mostrar, strlen(mostrar));
+		if((childpid = fork()) < 0){
+			perror("servidor: error al crear puerto de entrada");
+			continua = false;
+        		ret = 1; 
+			continue;
+		}else if(childpid == 0){
+			execl("./puerto_entrada", "puerto_entrada", par1, par2, par3, (char *) 0);
 			perror("servidor: error al ejecutar un cliente");
 			continua = false;
         		ret = 1;
