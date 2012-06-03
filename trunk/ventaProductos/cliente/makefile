@@ -2,7 +2,7 @@
 
 MYLIB= enviar.o recibir.o tcpopact.o
 LIBS	=
-CFLAGS	= -O -g -D_SLAX_ -I/root/Desktop/trunk/servidor_ids_clientes
+CFLAGS	= -O -g -D_SLAX_ -I/home/tomas/Documents/Distribuidos/trunk/servidor_ids_clientes
 
 # Internet stream version (TCP protocol).
 #
