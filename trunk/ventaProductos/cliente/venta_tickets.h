@@ -27,6 +27,7 @@
 #include "inet.h"
 #include "mensajes.h"
 #include <signal.h>
+#include <sys/stat.h>
 
 namespace mensajes{
 

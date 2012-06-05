@@ -16,6 +16,11 @@ int main(int argc, char ** argv){
 	sfd = atoi(argv[1]);
 	
 	clave = ftok(DIRECTORIO, COLA_ENTRADA);
+	struct stat fileInfo;
+	if( !( stat(DIRECTORIO,&fileInfo) == 0 && S_ISDIR(fileInfo.st_mode) ) ){
+		printf( "puerto_entrada: El directorio del ftok, %s, no existe\n", DIRECTORIO );
+		exit(1);
+	}
 	if((cola = msgget(clave, 0660)) == -1){
 		perror("cliente: error al crear la cola de compras");
 		exit(1);		
