@@ -42,6 +42,11 @@ int main(int argc, char ** argv){
 	pname = argv[0];
 
 	/*Creo la memoria compartida */
+	struct stat fileInfo;
+	if( !( stat(DIRECTORIO,&fileInfo) == 0 && S_ISDIR(fileInfo.st_mode) ) ){
+		printf( "El directorio del ftok, %s, no existe\n", DIRECTORIO );
+		exit(1);
+	}
 	clave = ftok(DIRECTORIO, SHM_NUM);
 	if((shmid = shmget(clave, sizeof(Estado), IPC_CREAT | IPC_EXCL | 0660)) == -1){
 		perror("servidor: error obteniendo la memoria compartida");
