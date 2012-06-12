@@ -8,7 +8,7 @@ SERVER = servidor_ids_clientes_server
 
 SOURCES_CLNT.c = 
 SOURCES_CLNT.h = 
-SOURCES_SVC.c = ServidorIds.cpp
+SOURCES_SVC.c = ServidorIds.c
 SOURCES_SVC.h = ServidorIds.h
 SOURCES.x = servidor_ids_clientes.x
 
@@ -17,7 +17,7 @@ TARGETS_CLNT.c = servidor_ids_clientes_clnt.c servidor_ids_clientes_client.c ser
 TARGETS = servidor_ids_clientes.h servidor_ids_clientes_xdr.c servidor_ids_clientes_clnt.c servidor_ids_clientes_svc.c servidor_ids_clientes_client.c servidor_ids_clientes_server.c
 
 OBJECTS_CLNT = $(SOURCES_CLNT.c:%.c=%.o) $(TARGETS_CLNT.c:%.c=%.o)
-OBJECTS_SVC = $(SOURCES_SVC.c:%.cpp=%.o) $(TARGETS_SVC.c:%.c=%.o)
+OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o)
 # Compiler flags 
 
 CFLAGS += -g 
