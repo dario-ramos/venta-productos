@@ -12,17 +12,19 @@ retorno * obtener_nuevo_id_cliente_1_svc(void *argp, struct svc_req *rqstp){
 	result.cod_ret = 1;
 	result.retorno_u.id_cliente = 0;
 	ServidorIds servidorIds;
-	int idCliente = servidorIds.pedirId();
+	ServidorIds_Conectar( &servidorIds );
+	int idCliente = ServidorIds_PedirId( &servidorIds );
 	printf("Se quiere entregar el id %i\n", idCliente);
-	if(servidorIds){
+	if( !servidorIds.huboError ){
 		result.cod_ret = 1;
 		result.retorno_u.id_cliente = idCliente;
 		printf("Todod joya %i\n", idCliente);
 	}else{
 		result.cod_ret = 2;
-		strcpy(result.retorno_u.msj_error, servidorIds.error_msg());
-		printf("Errorrr %s\n", servidorIds.error_msg());
+		strcpy(result.retorno_u.msj_error, servidorIds.msjError);
+		printf("Errorrr %s\n", servidorIds.msjError);
 	}
+	ServidorIds_Desconectar( &servidorIds );
 	return &result;
 }
 
@@ -31,13 +33,15 @@ retorno * devolver_id_cliente_1_svc(int *id, struct svc_req *rqstp){
 
 	printf("Se quiere devolver el id %i\n", *id);
 	ServidorIds servidorIds;
-	servidorIds.devolverId(*id);
-	if(servidorIds){
+	ServidorIds_Conectar( &servidorIds );
+	ServidorIds_DevolverId( &servidorIds, *id );
+	if( !servidorIds.huboError ){
 		result.cod_ret = 1;
 		result.retorno_u.id_cliente = *id;
 	}else{	
 		result.cod_ret = 2;
-		strcpy(result.retorno_u.msj_error, servidorIds.error_msg());
+		strcpy(result.retorno_u.msj_error, servidorIds.msjError);
 	}
+	ServidorIds_Desconectar( &servidorIds );
 	return &result;
 }
