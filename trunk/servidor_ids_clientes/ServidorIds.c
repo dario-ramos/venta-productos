@@ -19,6 +19,7 @@ int ServidorIds_GenerarArchivo( ServidorIds* pThis ){
 
 void ServidorIds_Conectar( ServidorIds* pThis ){
 	pThis->archivoIds = fopen( ARCHIVO, "r+b" );
+	pThis->huboError = 0;
 	if( pThis->archivoIds == NULL ){
 		if( !ServidorIds_GenerarArchivo( pThis ) ){
 			perror( "servidor_ids: error al generar el archivo de ids. " );
