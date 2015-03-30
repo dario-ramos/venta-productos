@@ -1,0 +1,1 @@
+Hay N clientes y M vendedores, distribuidos. El stock es limitado y debe validarse. Se ofrece una API que abstrae a los programadores de aplicación de las comunicaciones y la concurrencia.
